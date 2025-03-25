@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {TokenResponse} from '../model/token-response';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyAuthService {
-  private readonly clientId = 'e21572e92eb5440baecb4f6f60090a69';
-  private readonly redirectUri = 'http://localhost:4300/callback';
   private readonly scopes = 'user-read-private user-read-email user-library-read';
 
   private readonly tokenKey = 'spotify_token';
@@ -29,9 +28,9 @@ export class SpotifyAuthService {
   openAuthorizeUrl(state: string = ''): void {
     const params = new URLSearchParams({
       response_type: 'token',
-      client_id: this.clientId,
+      client_id: environment.clientId,
       scope: this.scopes,
-      redirect_uri: this.redirectUri,
+      redirect_uri: environment.redirectUri,
       state: state
     });
 
