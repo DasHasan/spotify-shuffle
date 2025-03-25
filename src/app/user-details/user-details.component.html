@@ -1,0 +1,7 @@
+<p>user-details works!</p>
+
+@if (user(); as user) {
+  <pre>{{ user | json }}</pre>
+} @else {
+  loading
+}
