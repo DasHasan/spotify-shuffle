@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {Episode} from '../model/episode';
+import {Episode} from '../../model/episode';
 import {EpisodesListItemComponent} from '../episodes-list-item/episodes-list-item.component';
 
 @Component({

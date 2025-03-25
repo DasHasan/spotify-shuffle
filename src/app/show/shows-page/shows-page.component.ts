@@ -1,11 +1,11 @@
 import {Component, inject, Signal, signal} from '@angular/core';
-import {SpotifyService} from '../service/spotify.service';
+import {SpotifyService} from '../../service/spotify.service';
 import {JsonPipe} from '@angular/common';
 import {ShowListItem} from '../show-list-item/show-list-item.component';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {switchMap} from 'rxjs';
-import {Page} from '../model/page';
-import {ShowEntry} from '../model/show-entry';
+import {Page} from '../../model/page';
+import {ShowEntry} from '../../model/show-entry';
 
 @Component({
   selector: 'app-shows-page',

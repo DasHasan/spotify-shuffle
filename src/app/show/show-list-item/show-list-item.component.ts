@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {Show} from '../model/show';
+import {Show} from '../../model/show';
 import {RouterLink} from '@angular/router';
 
 @Component({

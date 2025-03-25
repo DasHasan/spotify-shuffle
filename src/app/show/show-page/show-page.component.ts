@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {JsonPipe} from '@angular/common';
 import {map, switchMap} from 'rxjs';
-import {SpotifyService} from '../service/spotify.service';
-import {EpisodesListComponent} from '../episodes-list/episodes-list.component';
+import {SpotifyService} from '../../service/spotify.service';
+import {EpisodesListComponent} from '../../episodes/episodes-list/episodes-list.component';
 
 @Component({
   selector: 'app-show-page',

@@ -8,25 +8,25 @@ export const routes: Routes = [
   },
   {
     path: 'callback',
-    loadComponent: () => import('./callback/callback.component').then(m => m.CallbackComponent),
+    loadComponent: () => import('./auth/callback/callback.component').then(m => m.CallbackComponent),
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
+    loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent),
   },
   {
     path: 'user',
-    loadComponent: () => import('./user-details/user-details.component').then(m => m.UserDetailsComponent),
+    loadComponent: () => import('./user/user-details/user-details.component').then(m => m.UserDetailsComponent),
     canActivate: [spotifyGuard]
   },
   {
     path: 'shows',
-    loadComponent: () => import('./shows-page/shows-page.component').then(m => m.ShowsPageComponent),
+    loadComponent: () => import('./show/shows-page/shows-page.component').then(m => m.ShowsPageComponent),
     canActivate: [spotifyGuard]
   },
   {
     path: 'shows/:id',
-    loadComponent: () => import('./show-page/show-page.component').then(m => m.ShowPageComponent),
+    loadComponent: () => import('./show/show-page/show-page.component').then(m => m.ShowPageComponent),
     canActivate: [spotifyGuard]
   },
 ];
