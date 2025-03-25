@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {map, of} from 'rxjs';
+import {catchError, map, of} from 'rxjs';
 import {SpotifyAuthService} from './spotify-auth.service';
 import {SpotifyApiService} from './spotify-api.service';
 import {HttpParams} from '@angular/common/http';
@@ -14,7 +14,10 @@ export class SpotifyService {
   private readonly spotifyAuthService = inject(SpotifyAuthService);
 
   isAuthorized() {
-    return !this.spotifyAuthService.getToken() ? of(false) : this.getMe().pipe(map(me => !!me));
+    return !this.spotifyAuthService.getToken() ? of(false) : this.getMe().pipe(
+      catchError(() => of(false)),
+      map(me => !!me)
+    );
   }
 
   getMe() {
