@@ -1,5 +1,7 @@
 <app-page [extra]="extra" [loading]="!randomEpisode()" [showBack]="true" [title]="randomEpisode()?.name">
-  <app-episode-detail [episode]="randomEpisode()!"></app-episode-detail>
+  @if (randomEpisode()) {
+    <app-episode-detail [episode]="randomEpisode()!"></app-episode-detail>
+  }
 </app-page>
 
 <ng-template #extra>
