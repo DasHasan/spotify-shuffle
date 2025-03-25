@@ -1,6 +1,6 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
-import {SpotifyService} from './spotify.service';
+import {SpotifyService} from './service/spotify.service';
 import {map} from 'rxjs';
 
 export const spotifyGuard: CanActivateFn = (route, state) => {

@@ -1,5 +1,5 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {SpotifyService} from '../spotify.service';
+import {SpotifyService} from '../service/spotify.service';
 import {Subscription} from 'rxjs';
 import {JsonPipe} from '@angular/common';
 
