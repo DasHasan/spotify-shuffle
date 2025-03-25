@@ -9,6 +9,7 @@ import {Show} from '../model/show';
 import {EpisodePage} from '../model/episode-page';
 import {User} from '../model/user';
 import {RandomUtil} from '../random-util';
+import {Episode} from '../model/episode';
 
 @Injectable({
   providedIn: 'root'
@@ -36,14 +37,18 @@ export class SpotifyService {
     return this.spotifyApiService.getCall<Show>(`/shows/${id}`);
   }
 
-  getEpisodes(showId: string, page: PageInput): Observable<EpisodePage> {
+  getEpisodesPage(showId: string, page: PageInput): Observable<EpisodePage> {
     return this.spotifyApiService.getCall<EpisodePage>(`/shows/${showId}/episodes`, page);
+  }
+
+  getEpisode(episodeId: string): Observable<Episode> {
+    return this.spotifyApiService.getCall<Episode>(`/episodes/${episodeId}`);
   }
 
   getRandomEpisode(showId: string) {
     return this.getShow(showId).pipe(
       switchMap(
-        showPage => this.getEpisodes(showPage.id, {
+        showPage => this.getEpisodesPage(showPage.id, {
           limit: 1,
           offset: RandomUtil.getSecureRandomNumber(showPage.total_episodes)
         })

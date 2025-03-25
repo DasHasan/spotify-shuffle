@@ -26,8 +26,10 @@ export class RandomEpisodePageComponent {
   private readonly title = inject(Title);
   private readonly faviconService = inject(FaviconService);
   private readonly activatedRoute = inject(ActivatedRoute);
-  showId = toSignal(this.activatedRoute.params.pipe(map(params => params['id'])));
   private readonly spotifyService = inject(SpotifyService);
+
+  showId = toSignal(this.activatedRoute.params.pipe(map(params => params['showId'])));
+
   randomEpisode = toSignal<Episode>(
     this.spotifyService.getRandomEpisode(this.showId())
   );

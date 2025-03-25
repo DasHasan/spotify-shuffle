@@ -1,13 +1,15 @@
-<app-page [extra]="extra" [loading]="!episodes()" [showBack]="true" [title]="show()?.name">
+<app-page [extra]="extra" [loading]="isLoading()" [showBack]="true" [title]="show()?.name">
 
   <div class="flex-1 overflow-auto">
     <mat-nav-list>
-      @for (episode of episodes()?.items; track episode.id) {
+
+      @for (episode of episodes(); track episode.id) {
         <mat-list-item [routerLink]="episode.id">
-          <img matListItemIcon [ngSrc]="episode.images![0].url!" width="250" height="250" alt="">
+          <img matListItemIcon [ngSrc]="episode.images![2].url!" width="250" height="250" alt="">
           <a matListItemTitle>{{ episode.name }}</a>
         </mat-list-item>
       }
+
     </mat-nav-list>
   </div>
 

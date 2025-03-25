@@ -1,7 +1,7 @@
 import {Component, inject, signal} from '@angular/core';
 import {SpotifyService} from '../../service/spotify.service';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
-import {switchMap} from 'rxjs';
+import {finalize, switchMap, tap} from 'rxjs';
 import {Page} from '../../model/page';
 import {ShowEntry} from '../../model/show-entry';
 import {PaginatorComponent} from '../../paginator/paginator/paginator.component';
@@ -28,15 +28,21 @@ import {PageComponent} from '../../page/page.component';
   styles: ``
 })
 export class ShowsPageComponent {
+  private readonly spotifyService = inject(SpotifyService);
+
+  isLoading = signal(false);
+
   page = signal<PageInput>({
     limit: 10,
     offset: 0,
     index: 0,
   });
-  private readonly spotifyService = inject(SpotifyService);
+
   showsPage = toSignal<Page<ShowEntry> | undefined>(
     toObservable(this.page).pipe(
-      switchMap(page => this.spotifyService.getShows(page))
+      tap(_ => this.isLoading.set(true)),
+      switchMap(page => this.spotifyService.getShows(page)),
+      tap(_ => this.isLoading.set(false)),
     )
   );
 

@@ -1,10 +1,10 @@
-<app-page [loading]="!showsPage()">
+<app-page [loading]="isLoading()">
 
   <div class="flex-1">
     <mat-nav-list>
       @for (showEntry of showsPage()?.items; track showEntry.show.id) {
         <mat-list-item [routerLink]="showEntry.show.id">
-          <img matListItemIcon [ngSrc]="showEntry.show.images[0].url" alt="" width="250" height="250">
+          <img matListItemIcon [ngSrc]="showEntry.show.images[2].url" alt="" width="250" height="250">
           <a matListItemTitle>{{ showEntry.show.name }}</a>
         </mat-list-item>
       }
