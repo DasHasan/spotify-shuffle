@@ -6,18 +6,18 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {Episode} from '../../model/episode';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconAnchor} from '@angular/material/button';
-import {JsonPipe} from '@angular/common';
 import {Title} from '@angular/platform-browser';
 import {FaviconService} from '../../service/favicon.service';
 import {PageComponent} from '../../page/page.component';
+import {EpisodeDetailComponent} from '../episode-detail/episode-detail.component';
 
 @Component({
   selector: 'app-random-episode-page',
   imports: [
     MatIcon,
     MatIconAnchor,
-    JsonPipe,
-    PageComponent
+    PageComponent,
+    EpisodeDetailComponent
   ],
   templateUrl: './random-episode-page.component.html',
   styles: ``

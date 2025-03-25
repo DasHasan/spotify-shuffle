@@ -1,9 +1,16 @@
 <div class="h-dvh flex flex-col">
+
   <app-navbar [extra]="extra()" [showBack]="showBack()" [title]="title()"></app-navbar>
 
   @if (!loading()) {
 
-    <ng-content></ng-content>
+    <div class="flex-1 overflow-auto">
+      <ng-content></ng-content>
+    </div>
+
+    @if (footer()) {
+      <ng-container *ngTemplateOutlet="footer()!"></ng-container>
+    }
 
   } @else {
 

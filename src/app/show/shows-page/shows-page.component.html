@@ -1,19 +1,20 @@
-<app-page [loading]="isLoading()">
+<app-page [loading]="isLoading()" [footer]="footer">
 
-  <div class="flex-1">
-    <mat-nav-list>
-      @for (showEntry of showsPage()?.items; track showEntry.show.id) {
-        <mat-list-item [routerLink]="showEntry.show.id">
-          <img matListItemIcon [ngSrc]="showEntry.show.images[2].url" alt="" width="250" height="250">
-          <a matListItemTitle>{{ showEntry.show.name }}</a>
-        </mat-list-item>
-      }
-    </mat-nav-list>
-  </div>
+  <mat-nav-list>
+    @for (showEntry of showsPage()?.items; track showEntry.show.id) {
+      <mat-list-item [routerLink]="showEntry.show.id">
+        <img matListItemIcon [ngSrc]="showEntry.show.images[2].url" alt="" width="250" height="250">
+        <a matListItemTitle>{{ showEntry.show.name }}</a>
+      </mat-list-item>
+    }
+  </mat-nav-list>
 
+</app-page>
+
+<ng-template #footer>
   <app-paginator
     (pageChange)="loadPage($event)"
     [page]="page()"
     [size]="showsPage()?.total!"
   ></app-paginator>
-</app-page>
+</ng-template>

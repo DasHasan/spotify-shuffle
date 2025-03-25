@@ -4,9 +4,9 @@ import {spotifyGuard} from './spotify.guard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-    // pathMatch: 'full',
-    // redirectTo: 'shows'
+    // loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+    pathMatch: 'full',
+    redirectTo: 'shows'
   },
   {
     path: 'callback',

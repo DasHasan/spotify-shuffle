@@ -1,8 +1,3 @@
 <app-page [showBack]="true" [title]="episode()?.name">
-  <div class="flex-1 overflow-auto">
-
-    <p>episode-page works!</p>
-
-    <pre>{{ episode() | json }}</pre>
-  </div>
+  <app-episode-detail [episode]="episode()!"></app-episode-detail>
 </app-page>

@@ -1,14 +1,5 @@
 <app-page [extra]="extra" [loading]="!randomEpisode()" [showBack]="true" [title]="randomEpisode()?.name">
-
-  <div class="flex-1 overflow-auto">
-
-    <pre>{{ randomEpisode()?.external_urls?.spotify | json }}</pre>
-
-    <div class="bg-gray-50">
-      <pre class="whitespace-pre-wrap break-words">{{ randomEpisode()?.description }}</pre>
-    </div>
-
-  </div>
+  <app-episode-detail [episode]="randomEpisode()!"></app-episode-detail>
 </app-page>
 
 <ng-template #extra>

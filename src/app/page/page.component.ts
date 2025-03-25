@@ -1,12 +1,14 @@
-import {Component, input, TemplateRef} from '@angular/core';
+import {Component, input, signal, TemplateRef} from '@angular/core';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {NavbarComponent} from '../navbar/navbar/navbar.component';
+import {NgTemplateOutlet} from '@angular/common';
 
 @Component({
   selector: 'app-page',
   imports: [
     MatProgressSpinner,
-    NavbarComponent
+    NavbarComponent,
+    NgTemplateOutlet
   ],
   templateUrl: './page.component.html',
   styles: ``
@@ -17,4 +19,5 @@ export class PageComponent {
   title = input<string | null | undefined>('Spotify Shuffle');
   showBack = input<boolean>();
   extra = input<TemplateRef<any>>();
+  footer = input<TemplateRef<any>>();
 }
