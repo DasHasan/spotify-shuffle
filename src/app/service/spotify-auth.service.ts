@@ -6,7 +6,7 @@ import {TokenResponse} from '../model/token-response';
 })
 export class SpotifyAuthService {
   private readonly clientId = 'e21572e92eb5440baecb4f6f60090a69';
-  private readonly redirectUri = 'http://localhost:4200/callback';
+  private readonly redirectUri = 'http://localhost:4300/callback';
   private readonly scopes = 'user-read-private user-read-email user-library-read';
 
   private readonly tokenKey = 'spotify_token';
