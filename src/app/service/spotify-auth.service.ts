@@ -6,7 +6,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class SpotifyAuthService {
-  private readonly scopes = 'user-read-private user-read-email user-library-read';
+  private readonly scopes = 'user-read-private user-read-email user-library-read user-read-playback-position';
 
   private readonly tokenKey = 'spotify_token';
 
