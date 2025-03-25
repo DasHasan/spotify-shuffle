@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {catchError, map, Observable, of} from 'rxjs';
+import {catchError, map, Observable, of, switchMap} from 'rxjs';
 import {SpotifyAuthService} from './spotify-auth.service';
 import {SpotifyApiService} from './spotify-api.service';
 import {Page} from '../model/page';
@@ -8,6 +8,7 @@ import {PageInput} from '../model/page-input';
 import {Show} from '../model/show';
 import {EpisodePage} from '../model/episode-page';
 import {User} from '../model/user';
+import {RandomUtil} from '../random-util';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,21 @@ export class SpotifyService {
     return this.spotifyApiService.getCall<Show>(`/shows/${id}`);
   }
 
-  getEpisodes(episodeId: string, page: PageInput): Observable<EpisodePage> {
-    return this.spotifyApiService.getCall<EpisodePage>(`/shows/${episodeId}/episodes`, page);
+  getEpisodes(showId: string, page: PageInput): Observable<EpisodePage> {
+    return this.spotifyApiService.getCall<EpisodePage>(`/shows/${showId}/episodes`, page);
   }
+
+  getRandomEpisode(showId: string) {
+    return this.getShow(showId).pipe(
+      switchMap(
+        showPage => this.getEpisodes(showPage.id, {
+          limit: 1,
+          offset: RandomUtil.getSecureRandomNumber(showPage.total_episodes)
+        })
+      ),
+
+      map(episodePage => episodePage.items![0]),
+    )
+  }
+
 }

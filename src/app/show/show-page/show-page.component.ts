@@ -1,18 +1,30 @@
 import {Component, inject, signal} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {map, switchMap} from 'rxjs';
 import {SpotifyService} from '../../service/spotify.service';
-import {EpisodesListComponent} from '../../episodes/episodes-list/episodes-list.component';
 import {NavbarComponent} from '../../navbar/navbar/navbar.component';
 import {PaginatorComponent} from '../../paginator/paginator/paginator.component';
+import {PageInput} from '../../model/page-input';
+import {PageEvent} from '@angular/material/paginator';
+import {MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from '@angular/material/list';
+import {MatIconButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-show-page',
   imports: [
-    EpisodesListComponent,
     NavbarComponent,
     PaginatorComponent,
+    MatListItemTitle,
+    MatNavList,
+    MatListItem,
+    MatListItemIcon,
+    MatIconButton,
+    MatIcon,
+    RouterLink,
+    MatProgressSpinner,
   ],
   templateUrl: './show-page.component.html',
   styles: ``
@@ -21,42 +33,31 @@ export class ShowPageComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly spotifyService = inject(SpotifyService);
 
-  page = signal({
+  page = signal<PageInput>({
     offset: 0,
     limit: 10,
-    page: 1,
+    index: 1,
   });
 
-  id = toSignal(
-    this.activatedRoute.params.pipe(map(params => params['id']))
+  showId = toSignal(
+    this.activatedRoute.params.pipe(map(params => params['showId']))
   );
 
   show = toSignal(
-    this.spotifyService.getShow(this.id())
+    this.spotifyService.getShow(this.showId())
   );
 
   episodes = toSignal(
     toObservable(this.page).pipe(
-      switchMap(page => this.spotifyService.getEpisodes(this.id(), page))
+      switchMap(page => this.spotifyService.getEpisodes(this.showId(), page))
     )
   );
 
-  prevPage() {
-    if (this.page().page == 1) {
-      return
-    }
-    this.page.update(({limit, offset, page}) => ({
-      limit: limit,
-      offset: offset - limit,
-      page: page - 1,
-    }));
-  }
-
-  nextPage() {
-    this.page.update(page => ({
-      offset: page.offset + page.limit,
-      limit: page.limit,
-      page: page.page + 1,
-    }))
+  loadPage({pageIndex, pageSize}: PageEvent) {
+    this.page.set({
+      limit: pageSize,
+      offset: pageSize * pageIndex,
+      index: pageIndex
+    });
   }
 }

@@ -31,10 +31,8 @@ export class CallbackComponent implements OnInit {
         };
         this.spotifyAuthService.saveToken(tokenResponse);
 
-        if (tokenResponse.state) {
-          this.router.navigate([tokenResponse.state]);
-        }
-
+        const redirect = tokenResponse.state === null ? '/' : tokenResponse.state;
+        this.router.navigate([redirect]);
       })
     );
   }

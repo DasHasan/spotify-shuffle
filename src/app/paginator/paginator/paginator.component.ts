@@ -1,13 +1,17 @@
-import {Component, input, output, signal} from '@angular/core';
+import {Component, input, output} from '@angular/core';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {PageInput} from '../../model/page-input';
 
 @Component({
   selector: 'app-paginator',
-  imports: [],
+  imports: [
+    MatPaginator
+  ],
   templateUrl: './paginator.component.html',
   styles: ``
 })
 export class PaginatorComponent {
-  page = input.required<number>();
-  prevPage = output();
-  nextPage = output();
+  size = input.required<number>();
+  page = input.required<PageInput>();
+  pageChange = output<PageEvent>();
 }

@@ -6,6 +6,10 @@
   @include mat.toolbar-overrides((
     container-background-color: linear-gradient(to right, #34d399, #2dd4bf),
   ));
+
+  @include mat.button-overrides((
+    filled-container-color: #2dd4bf,
+  ));
 }
 
 @tailwind base;

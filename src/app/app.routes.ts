@@ -5,6 +5,8 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+    // pathMatch: 'full',
+    // redirectTo: 'shows'
   },
   {
     path: 'callback',
@@ -25,8 +27,13 @@ export const routes: Routes = [
     canActivate: [spotifyGuard]
   },
   {
-    path: 'shows/:id',
+    path: 'shows/:showId',
     loadComponent: () => import('./show/show-page/show-page.component').then(m => m.ShowPageComponent),
+    canActivate: [spotifyGuard]
+  },
+  {
+    path: 'shows/:id/random',
+    loadComponent: () => import('./episode/random-episode-page/random-episode-page.component').then(m => m.RandomEpisodePageComponent),
     canActivate: [spotifyGuard]
   },
 ];

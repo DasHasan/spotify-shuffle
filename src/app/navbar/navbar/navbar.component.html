@@ -1,10 +1,22 @@
 <mat-toolbar>
 
-  <button mat-icon-button routerLink="/">
-    <mat-icon fontIcon="home" class="text-white"></mat-icon>
-  </button>
+  @if (showBack()) {
+    <button mat-icon-button routerLink="..">
+      <mat-icon fontIcon="arrow_back" class="text-white"></mat-icon>
+    </button>
+  } @else {
+    <button mat-icon-button routerLink="/">
+      <mat-icon fontIcon="home" class="text-white"></mat-icon>
+    </button>
+  }
 
-  <span class="flex-1 block text-nowrap text-ellipsis overflow-hidden text-white">Spotify Shuffle</span>
+  <span class="flex-1 block text-nowrap text-ellipsis overflow-hidden text-white">
+    {{ title() }}
+  </span>
+
+  @if (extra()) {
+    <ng-container *ngTemplateOutlet="extra()!"></ng-container>
+  }
 
   <button mat-icon-button routerLink="/user">
     <mat-icon fontIcon="person" class="text-white"></mat-icon>

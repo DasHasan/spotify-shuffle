@@ -1,9 +1,30 @@
-<div class="h-svh flex flex-col">
-  <app-navbar [title]="show()?.name"></app-navbar>
+@if (episodes()) {
+  <div class="h-svh flex flex-col">
+    <app-navbar [showBack]="true" [title]="show()?.name" [extra]="extra"></app-navbar>
 
-  <div class="flex-1 overflow-auto">
-    <app-episodes-list [episodes]="episodes()?.items!"></app-episodes-list>
+    <div class="flex-1 overflow-auto">
+      <mat-nav-list>
+        @for (episode of episodes()?.items; track episode.id) {
+          <mat-list-item [routerLink]="episode.id">
+            <img matListItemIcon [src]="episode.images![0].url" alt="">
+            <a matListItemTitle>{{ episode.name }}</a>
+          </mat-list-item>
+        }
+      </mat-nav-list>
+    </div>
+
+    <app-paginator (pageChange)="loadPage($event)"
+                   [page]="page()"
+                   [size]="show()?.total_episodes!"></app-paginator>
   </div>
+} @else {
+  <div class="h-svh flex justify-center items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+}
 
-  <app-paginator [page]="page().page" (prevPage)="prevPage()" (nextPage)="nextPage()"></app-paginator>
-</div>
+<ng-template #extra>
+  <button mat-icon-button routerLink="random">
+    <mat-icon fontIcon="shuffle" class="text-white"></mat-icon>
+  </button>
+</ng-template>
