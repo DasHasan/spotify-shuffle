@@ -1,6 +1,8 @@
-<p>show-page works!</p>
-
 <pre>{{ show()?.name | json }}</pre>
 <pre>{{ show()?.description | json }}</pre>
+
+<pre>{{ page() | json }}</pre>
+
+<button (click)="nextPage()">next</button>
 
 <app-episodes-list [episodes]="episodes()?.items!"></app-episodes-list>

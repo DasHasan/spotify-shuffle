@@ -26,7 +26,7 @@ export class SpotifyService {
     return this.spotifyApiService.getCall<{}>('/me');
   }
 
-  getShows(page: PageInput = {limit: 20, offset: 0}): Observable<Page<ShowEntry>> {
+  getShows(page: PageInput): Observable<Page<ShowEntry>> {
     return this.spotifyApiService.getCall<Page<ShowEntry>>('/me/shows', page);
   }
 
@@ -34,7 +34,7 @@ export class SpotifyService {
     return this.spotifyApiService.getCall<Show>(`/shows/${id}`);
   }
 
-  getEpisodes(episodeId: string): Observable<EpisodePage> {
-    return this.spotifyApiService.getCall<EpisodePage>(`/shows/${episodeId}/episodes`);
+  getEpisodes(episodeId: string, page: PageInput): Observable<EpisodePage> {
+    return this.spotifyApiService.getCall<EpisodePage>(`/shows/${episodeId}/episodes`, page);
   }
 }
