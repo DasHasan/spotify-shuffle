@@ -1,7 +1,9 @@
 import {Component, inject} from '@angular/core';
 import {SpotifyService} from '../service/spotify.service';
 import {AsyncPipe, JsonPipe} from '@angular/common';
-import {tap} from 'rxjs';
+import {Observable} from 'rxjs';
+import {Page} from '../model/page';
+import {ShowEntry} from '../model/show-entry';
 
 @Component({
   selector: 'app-shows-page',
@@ -15,5 +17,5 @@ import {tap} from 'rxjs';
 export class ShowsPageComponent {
   private readonly spotifyService = inject(SpotifyService);
 
-  shows$ = this.spotifyService.getShows().pipe(tap(console.log))
+  showsPage$: Observable<Page<ShowEntry>> = this.spotifyService.getShows();
 }

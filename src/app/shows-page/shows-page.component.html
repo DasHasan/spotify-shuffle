@@ -1,3 +1,8 @@
 <p>shows-page works!</p>
 
-<pre>{{ shows$ | async | json }}</pre>
+@if (showsPage$ | async; as showsPage) {
+  @for (showEntry of showsPage.items; track showEntry.show.id) {
+    <pre>{{ showEntry.show.name | json }}</pre>
+    <pre>{{ showEntry.show.description | json }}</pre>
+  }
+}
