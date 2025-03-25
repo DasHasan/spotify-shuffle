@@ -1,4 +1,4 @@
-import {Component, effect, inject, signal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {map, switchMap} from 'rxjs';
@@ -30,19 +30,16 @@ import {NgOptimizedImage} from '@angular/common';
   styles: ``
 })
 export class ShowPageComponent {
-  private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly spotifyService = inject(SpotifyService);
-
   page = signal<PageInput>({
     offset: 0,
     limit: 10,
     index: 1,
   });
-
+  private readonly activatedRoute = inject(ActivatedRoute);
   showId = toSignal(
     this.activatedRoute.params.pipe(map(params => params['showId']))
   );
-
+  private readonly spotifyService = inject(SpotifyService);
   show = toSignal(
     this.spotifyService.getShow(this.showId())
   );

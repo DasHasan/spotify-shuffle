@@ -1,10 +1,8 @@
 import {Component, effect, inject} from '@angular/core';
-import {NavbarComponent} from '../../navbar/navbar/navbar.component';
 import {SpotifyService} from '../../service/spotify.service';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {Episode} from '../../model/episode';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconAnchor} from '@angular/material/button';
@@ -16,8 +14,6 @@ import {PageComponent} from '../../page/page.component';
 @Component({
   selector: 'app-random-episode-page',
   imports: [
-    NavbarComponent,
-    MatProgressSpinner,
     MatIcon,
     MatIconAnchor,
     JsonPipe,
@@ -30,10 +26,8 @@ export class RandomEpisodePageComponent {
   private readonly title = inject(Title);
   private readonly faviconService = inject(FaviconService);
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly spotifyService = inject(SpotifyService);
-
   showId = toSignal(this.activatedRoute.params.pipe(map(params => params['id'])));
-
+  private readonly spotifyService = inject(SpotifyService);
   randomEpisode = toSignal<Episode>(
     this.spotifyService.getRandomEpisode(this.showId())
   );

@@ -1,4 +1,4 @@
-<app-page [loading]="!randomEpisode()" [showBack]="true" [title]="randomEpisode()?.name" [extra]="extra">
+<app-page [extra]="extra" [loading]="!randomEpisode()" [showBack]="true" [title]="randomEpisode()?.name">
 
   <div class="flex-1 overflow-auto">
 
@@ -11,9 +11,8 @@
   </div>
 </app-page>
 
-
 <ng-template #extra>
-  <a mat-icon-button [href]="randomEpisode()?.external_urls?.spotify" target="_blank">
-    <mat-icon fontIcon="open_in_new" class="text-white"></mat-icon>
+  <a [href]="randomEpisode()?.external_urls?.spotify" mat-icon-button target="_blank">
+    <mat-icon class="text-white" fontIcon="open_in_new"></mat-icon>
   </a>
 </ng-template>
