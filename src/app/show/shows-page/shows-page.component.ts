@@ -12,6 +12,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {PageInput} from '../../model/page-input';
 import {NgOptimizedImage} from '@angular/common';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {PageComponent} from '../../page/page.component';
 
 @Component({
   selector: 'app-shows-page',
@@ -24,7 +25,8 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatListItemIcon,
     RouterLink,
     NgOptimizedImage,
-    MatProgressSpinner
+    MatProgressSpinner,
+    PageComponent
   ],
   templateUrl: './shows-page.component.html',
   styles: ``

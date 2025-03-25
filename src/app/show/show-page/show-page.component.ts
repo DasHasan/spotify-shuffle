@@ -1,21 +1,20 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {map, switchMap} from 'rxjs';
 import {SpotifyService} from '../../service/spotify.service';
-import {NavbarComponent} from '../../navbar/navbar/navbar.component';
 import {PaginatorComponent} from '../../paginator/paginator/paginator.component';
 import {PageInput} from '../../model/page-input';
 import {PageEvent} from '@angular/material/paginator';
 import {MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from '@angular/material/list';
 import {MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {PageComponent} from '../../page/page.component';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-show-page',
   imports: [
-    NavbarComponent,
     PaginatorComponent,
     MatListItemTitle,
     MatNavList,
@@ -24,7 +23,8 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatIconButton,
     MatIcon,
     RouterLink,
-    MatProgressSpinner,
+    PageComponent,
+    NgOptimizedImage,
   ],
   templateUrl: './show-page.component.html',
   styles: ``

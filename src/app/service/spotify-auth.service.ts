@@ -30,7 +30,7 @@ export class SpotifyAuthService {
       response_type: 'token',
       client_id: environment.clientId,
       scope: this.scopes,
-      redirect_uri: environment.redirectUri,
+      redirect_uri: `${window.location.protocol}//${window.location.host}/callback`, // window.location.hostname,
       state: state
     });
 

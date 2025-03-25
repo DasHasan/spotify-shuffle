@@ -1,26 +1,19 @@
-@if (showsPage()) {
-  <div class="h-svh flex flex-col">
-    <app-navbar></app-navbar>
+<app-page [loading]="!showsPage()">
 
-    <div class="flex-1">
-      <mat-nav-list>
-        @for (showEntry of showsPage()?.items; track showEntry.show.id) {
-          <mat-list-item [routerLink]="showEntry.show.id">
-            <img matListItemIcon [ngSrc]="showEntry.show.images[0].url" alt="" width="250" height="250">
-            <a matListItemTitle>{{ showEntry.show.name }}</a>
-          </mat-list-item>
-        }
-      </mat-nav-list>
-    </div>
+  <div class="flex-1">
+    <mat-nav-list>
+      @for (showEntry of showsPage()?.items; track showEntry.show.id) {
+        <mat-list-item [routerLink]="showEntry.show.id">
+          <img matListItemIcon [ngSrc]="showEntry.show.images[0].url" alt="" width="250" height="250">
+          <a matListItemTitle>{{ showEntry.show.name }}</a>
+        </mat-list-item>
+      }
+    </mat-nav-list>
+  </div>
 
-    <app-paginator
-      (pageChange)="loadPage($event)"
-      [size]="showsPage()?.total!"
-      [page]="page()"
-    ></app-paginator>
-  </div>
-} @else {
-  <div class="h-svh flex justify-center items-center">
-    <mat-spinner></mat-spinner>
-  </div>
-}
+  <app-paginator
+    (pageChange)="loadPage($event)"
+    [size]="showsPage()?.total!"
+    [page]="page()"
+  ></app-paginator>
+</app-page>

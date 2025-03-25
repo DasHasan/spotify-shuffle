@@ -11,6 +11,7 @@ import {MatIconAnchor} from '@angular/material/button';
 import {JsonPipe} from '@angular/common';
 import {Title} from '@angular/platform-browser';
 import {FaviconService} from '../../service/favicon.service';
+import {PageComponent} from '../../page/page.component';
 
 @Component({
   selector: 'app-random-episode-page',
@@ -19,7 +20,8 @@ import {FaviconService} from '../../service/favicon.service';
     MatProgressSpinner,
     MatIcon,
     MatIconAnchor,
-    JsonPipe
+    JsonPipe,
+    PageComponent
   ],
   templateUrl: './random-episode-page.component.html',
   styles: ``

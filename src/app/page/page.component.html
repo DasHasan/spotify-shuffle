@@ -1,0 +1,16 @@
+<div class="h-dvh flex flex-col">
+  <app-navbar [showBack]="showBack()" [title]="title()" [extra]="extra()"></app-navbar>
+
+  @if (!loading()) {
+
+    <ng-content></ng-content>
+
+  } @else {
+
+    <div class="h-full flex justify-center items-center">
+      <mat-spinner></mat-spinner>
+    </div>
+
+  }
+
+</div>
