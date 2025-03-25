@@ -2,6 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {SpotifyService} from '../spotify.service';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {SpotifyAuthService} from '../spotify-auth.service';
 
 @Component({
   selector: 'app-callback',
@@ -16,7 +17,7 @@ export class CallbackComponent implements OnInit {
 
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly spotifyService = inject(SpotifyService);
+  private readonly spotifyAuthService = inject(SpotifyAuthService);
 
   ngOnInit() {
     this.subscription.add(
@@ -29,7 +30,7 @@ export class CallbackComponent implements OnInit {
           expiresIn: urlSearchParams.get('expires_in')!,
           state: urlSearchParams.get('state')!,
         };
-        this.spotifyService.saveToken(tokenResponse);
+        this.spotifyAuthService.saveToken(tokenResponse);
 
         if (tokenResponse.state) {
           this.router.navigate([tokenResponse.state]);

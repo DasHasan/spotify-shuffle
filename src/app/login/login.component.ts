@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {SpotifyService} from '../spotify.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {SpotifyAuthService} from '../spotify-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import {Subscription} from 'rxjs';
 })
 export class LoginComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly spotifyService = inject(SpotifyService);
+  private readonly spotifyAuthService = inject(SpotifyAuthService);
 
   private subscription = new Subscription();
 
@@ -19,7 +20,7 @@ export class LoginComponent {
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(queryParams => {
         const redirectTo = queryParams['redirectTo'] ?? null;
-        this.spotifyService.openAuthorizeUrl(redirectTo);
+        this.spotifyAuthService.openAuthorizeUrl(redirectTo);
       })
     );
   }
