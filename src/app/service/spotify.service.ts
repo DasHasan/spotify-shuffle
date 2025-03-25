@@ -1,13 +1,13 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map, of} from 'rxjs';
 import {SpotifyAuthService} from './spotify-auth.service';
+import {SpotifyApiService} from './spotify-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
-  private readonly http = inject(HttpClient);
+  private readonly spotifyApiService = inject(SpotifyApiService);
   private readonly spotifyAuthService = inject(SpotifyAuthService);
 
   isAuthorized() {
@@ -15,11 +15,10 @@ export class SpotifyService {
   }
 
   getMe() {
-    return this.http.get(`https://api.spotify.com/v1/me`, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + this.spotifyAuthService.getToken().accessToken,
-      })
-    })
+    return this.spotifyApiService.getCall('/me');
   }
 
+  getShows() {
+    return this.spotifyApiService.getCall('/me/shows');
+  }
 }

@@ -19,4 +19,9 @@ export const routes: Routes = [
     loadComponent: () => import('./user-details/user-details.component').then(m => m.UserDetailsComponent),
     canActivate: [spotifyGuard]
   },
+  {
+    path: 'shows',
+    loadComponent: () => import('./shows-page/shows-page.component').then(m => m.ShowsPageComponent),
+    canActivate: [spotifyGuard]
+  },
 ];
