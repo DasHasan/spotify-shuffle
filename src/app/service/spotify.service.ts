@@ -1,9 +1,10 @@
 import {inject, Injectable} from '@angular/core';
-import {catchError, map, of} from 'rxjs';
+import {catchError, map, Observable, of} from 'rxjs';
 import {SpotifyAuthService} from './spotify-auth.service';
 import {SpotifyApiService} from './spotify-api.service';
 import {Page} from '../model/page';
 import {ShowEntry} from '../model/show-entry';
+import {PageInput} from '../model/page-input';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,7 @@ export class SpotifyService {
     return this.spotifyApiService.getCall<{}>('/me');
   }
 
-  getShows() {
-    return this.spotifyApiService.getCall<Page<ShowEntry>>('/me/shows', {
-        limit: 20,
-        offset: 0
-      }
-    );
+  getShows(page: PageInput = {limit: 20, offset: 0}): Observable<Page<ShowEntry>> {
+    return this.spotifyApiService.getCall<Page<ShowEntry>>('/me/shows', page);
   }
 }

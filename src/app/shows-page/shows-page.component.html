@@ -1,7 +1,15 @@
 <p>shows-page works!</p>
 
-@if (showsPage$ | async; as showsPage) {
-  @for (showEntry of showsPage.items; track showEntry.show.id) {
-    <app-show-detail [show]="showEntry.show"></app-show-detail>
-  }
+<pre>{{ page() | json }}</pre>
+
+<button (click)="nextPage()">next</button>
+
+@if (showsPage(); as showsPage) {
+  <ul>
+    @for (showEntry of showsPage.items; track showEntry.show.id) {
+      <li>
+        <app-show-detail [show]="showEntry.show"></app-show-detail>
+      </li>
+    }
+  </ul>
 }

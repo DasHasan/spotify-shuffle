@@ -1,16 +1,17 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Signal, signal} from '@angular/core';
 import {SpotifyService} from '../service/spotify.service';
-import {AsyncPipe} from '@angular/common';
-import {Observable} from 'rxjs';
+import {JsonPipe} from '@angular/common';
+import {ShowDetailComponent} from '../show-detail/show-detail.component';
+import {toObservable, toSignal} from '@angular/core/rxjs-interop';
+import {switchMap} from 'rxjs';
 import {Page} from '../model/page';
 import {ShowEntry} from '../model/show-entry';
-import {ShowDetailComponent} from '../show-detail/show-detail.component';
 
 @Component({
   selector: 'app-shows-page',
   imports: [
-    AsyncPipe,
-    ShowDetailComponent
+    ShowDetailComponent,
+    JsonPipe
   ],
   templateUrl: './shows-page.component.html',
   styles: ``
@@ -18,5 +19,21 @@ import {ShowDetailComponent} from '../show-detail/show-detail.component';
 export class ShowsPageComponent {
   private readonly spotifyService = inject(SpotifyService);
 
-  showsPage$: Observable<Page<ShowEntry>> = this.spotifyService.getShows();
+  page = signal({
+    limit: 10,
+    offset: 0
+  });
+
+  showsPage: Signal<Page<ShowEntry> | undefined> = toSignal(
+    toObservable(this.page).pipe(
+      switchMap(page => this.spotifyService.getShows(page))
+    )
+  );
+
+  nextPage() {
+    this.page.update(({limit, offset}) => ({
+      limit: limit,
+      offset: offset + limit
+    }));
+  }
 }
