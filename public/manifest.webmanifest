@@ -1,6 +1,4 @@
 {
-  "name": "spotify-shuffle",
-  "short_name": "spotify-shuffle",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

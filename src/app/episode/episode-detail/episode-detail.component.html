@@ -5,6 +5,8 @@
     <div class="flex items-center gap-4 text-sm text-gray-600">
       @if (episode().release_date) {
         <span>{{ episode().release_date | date:'mediumDate' }}</span>
+
+
       }
 
       @if (episode().duration_ms) {
