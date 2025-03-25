@@ -1,7 +1,7 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {SpotifyService} from '../service/spotify.service';
-import {Subscription} from 'rxjs';
 import {JsonPipe} from '@angular/common';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-user-details',
@@ -11,15 +11,8 @@ import {JsonPipe} from '@angular/common';
   templateUrl: './user-details.component.html',
   styles: ``
 })
-export class UserDetailsComponent implements OnInit {
-  user = signal<{} | null>(null);
-
-  private subscription = new Subscription();
+export class UserDetailsComponent {
   private readonly spotifyService = inject(SpotifyService);
 
-  ngOnInit() {
-    this.subscription.add(
-      this.spotifyService.getMe().subscribe(me => this.user.set(me))
-    );
-  }
+  user = toSignal(this.spotifyService.getMe());
 }
