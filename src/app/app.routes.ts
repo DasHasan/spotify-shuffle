@@ -32,13 +32,13 @@ export const routes: Routes = [
     canActivate: [spotifyGuard]
   },
   {
-    path: 'shows/:showId/:episodeId',
-    loadComponent: () => import('./episode/episode-page/episode-page.component').then(m => m.EpisodePageComponent),
+    path: 'shows/:showId/random',
+    loadComponent: () => import('./episode/random-episode-page/random-episode-page.component').then(m => m.RandomEpisodePageComponent),
     canActivate: [spotifyGuard]
   },
   {
-    path: 'shows/:showId/random',
-    loadComponent: () => import('./episode/random-episode-page/random-episode-page.component').then(m => m.RandomEpisodePageComponent),
+    path: 'shows/:showId/:episodeId',
+    loadComponent: () => import('./episode/episode-page/episode-page.component').then(m => m.EpisodePageComponent),
     canActivate: [spotifyGuard]
   },
 ];

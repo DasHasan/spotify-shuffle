@@ -4,7 +4,7 @@
     <mat-nav-list>
 
       @for (episode of episodes(); track episode.id) {
-        <mat-list-item [routerLink]="episode.id">
+        <mat-list-item [routerLink]="[episode.id]">
           <img matListItemIcon [ngSrc]="episode.images![2].url!" width="250" height="250" alt="">
           <a matListItemTitle>{{ episode.name }}</a>
         </mat-list-item>
