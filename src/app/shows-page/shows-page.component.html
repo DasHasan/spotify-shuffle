@@ -2,7 +2,6 @@
 
 @if (showsPage$ | async; as showsPage) {
   @for (showEntry of showsPage.items; track showEntry.show.id) {
-    <pre>{{ showEntry.show.name | json }}</pre>
-    <pre>{{ showEntry.show.description | json }}</pre>
+    <app-show-detail [show]="showEntry.show"></app-show-detail>
   }
 }

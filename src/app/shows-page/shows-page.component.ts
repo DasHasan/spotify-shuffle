@@ -1,15 +1,16 @@
 import {Component, inject} from '@angular/core';
 import {SpotifyService} from '../service/spotify.service';
-import {AsyncPipe, JsonPipe} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {Observable} from 'rxjs';
 import {Page} from '../model/page';
 import {ShowEntry} from '../model/show-entry';
+import {ShowDetailComponent} from '../show-detail/show-detail.component';
 
 @Component({
   selector: 'app-shows-page',
   imports: [
     AsyncPipe,
-    JsonPipe
+    ShowDetailComponent
   ],
   templateUrl: './shows-page.component.html',
   styles: ``
