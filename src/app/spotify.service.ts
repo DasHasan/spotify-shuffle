@@ -14,6 +14,7 @@ export class SpotifyService {
   private readonly tokenKey = 'spotify_token';
 
   saveToken(tokenResponse: TokenResponse) {
+    console.log(tokenResponse);
     localStorage.setItem(
       this.tokenKey,
       JSON.stringify(tokenResponse)
@@ -33,9 +34,7 @@ export class SpotifyService {
     return !authKey ? of(false) : this.getMe().pipe(map(me => !!me));
   }
 
-  authorize(): void {
-    const state = 'this is a random state';
-
+  openAuthorizeUrl(state: string = ''): void {
     const scope = 'user-read-private user-read-email';
 
     const params = new URLSearchParams({

@@ -5,7 +5,6 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-    // canActivate: [spotifyGuard]
   },
   {
     path: 'callback',
@@ -18,5 +17,6 @@ export const routes: Routes = [
   {
     path: 'user',
     loadComponent: () => import('./user-details/user-details.component').then(m => m.UserDetailsComponent),
+    canActivate: [spotifyGuard]
   },
 ];
