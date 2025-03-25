@@ -11,6 +11,7 @@ import {FaviconService} from '../../service/favicon.service';
 import {PageComponent} from '../../page/page.component';
 import {EpisodeDetailComponent} from '../episode-detail/episode-detail.component';
 import {Platform} from '@angular/cdk/platform';
+import {Show} from '../../model/show';
 
 @Component({
     selector: 'app-random-episode-page',
@@ -32,16 +33,22 @@ export class RandomEpisodePageComponent {
 
     showId = toSignal(this.activatedRoute.params.pipe(map(params => params['showId'])));
 
+    show = toSignal<Show>(
+        this.spotifyService.getShow(this.showId())
+    )
+
     randomEpisode = toSignal<Episode>(
         this.spotifyService.getRandomEpisode(this.showId())
     );
 
     constructor() {
         effect((onCleanup) => {
+            if (this.show()) {
+                this.title.setTitle(this.show()?.name!);
+            }
 
             if (this.randomEpisode()) {
-                this.faviconService.setFavicon(this.randomEpisode()?.images![0].url!)
-                this.title.setTitle(this.randomEpisode()?.name!);
+                this.faviconService.setFavicon(this.randomEpisode()?.images![0].url!);
 
                 if (this.platform.ANDROID) {
                     window.open(this.randomEpisode()?.uri, '_blank');
