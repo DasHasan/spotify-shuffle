@@ -7,6 +7,7 @@ import {ShowEntry} from '../model/show-entry';
 import {PageInput} from '../model/page-input';
 import {Show} from '../model/show';
 import {EpisodePage} from '../model/episode-page';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class SpotifyService {
     );
   }
 
-  getMe() {
-    return this.spotifyApiService.getCall<{}>('/me');
+  getMe(): Observable<User> {
+    return this.spotifyApiService.getCall<User>('/me');
   }
 
   getShows(page: PageInput): Observable<Page<ShowEntry>> {

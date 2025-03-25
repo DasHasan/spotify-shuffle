@@ -1,11 +1,12 @@
 import {Component, input} from '@angular/core';
 import {Episode} from '../../model/episode';
-import {EpisodesListItemComponent} from '../episodes-list-item/episodes-list-item.component';
+import {DatePipe, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-episodes-list',
   imports: [
-    EpisodesListItemComponent
+    DatePipe,
+    NgOptimizedImage
   ],
   templateUrl: './episodes-list.component.html',
   styles: ``

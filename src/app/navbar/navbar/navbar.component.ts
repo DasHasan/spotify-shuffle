@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -10,5 +10,5 @@ import {RouterLink} from '@angular/router';
   styles: ``
 })
 export class NavbarComponent {
-
+  title = input<string>();
 }

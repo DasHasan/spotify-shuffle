@@ -1,16 +1,18 @@
 import {Component, inject, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
-import {JsonPipe} from '@angular/common';
 import {map, switchMap} from 'rxjs';
 import {SpotifyService} from '../../service/spotify.service';
 import {EpisodesListComponent} from '../../episodes/episodes-list/episodes-list.component';
+import {NavbarComponent} from '../../navbar/navbar/navbar.component';
+import {PaginatorComponent} from '../../paginator/paginator/paginator.component';
 
 @Component({
   selector: 'app-show-page',
   imports: [
-    JsonPipe,
-    EpisodesListComponent
+    EpisodesListComponent,
+    NavbarComponent,
+    PaginatorComponent,
   ],
   templateUrl: './show-page.component.html',
   styles: ``
@@ -21,7 +23,8 @@ export class ShowPageComponent {
 
   page = signal({
     offset: 0,
-    limit: 10
+    limit: 10,
+    page: 1,
   });
 
   id = toSignal(
@@ -38,10 +41,22 @@ export class ShowPageComponent {
     )
   );
 
+  prevPage() {
+    if (this.page().page == 1) {
+      return
+    }
+    this.page.update(({limit, offset, page}) => ({
+      limit: limit,
+      offset: offset - limit,
+      page: page - 1,
+    }));
+  }
+
   nextPage() {
     this.page.update(page => ({
       offset: page.offset + page.limit,
-      limit: page.limit
+      limit: page.limit,
+      page: page.page + 1,
     }))
   }
 }

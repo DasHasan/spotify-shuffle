@@ -1,8 +1,9 @@
-<pre>{{ show()?.name | json }}</pre>
-<pre>{{ show()?.description | json }}</pre>
+<div class="h-svh flex flex-col">
+  <app-navbar [title]="show()?.name"></app-navbar>
 
-<pre>{{ page() | json }}</pre>
+  <div class="flex-1 overflow-auto">
+    <app-episodes-list [episodes]="episodes()?.items!"></app-episodes-list>
+  </div>
 
-<button (click)="nextPage()">next</button>
-
-<app-episodes-list [episodes]="episodes()?.items!"></app-episodes-list>
+  <app-paginator [page]="page().page" (prevPage)="prevPage()" (nextPage)="nextPage()"></app-paginator>
+</div>

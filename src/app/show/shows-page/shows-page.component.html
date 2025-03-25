@@ -1,15 +1,17 @@
-<p>shows-page works!</p>
+<div class="h-svh flex flex-col">
+  <app-navbar></app-navbar>
 
-<pre>{{ page() | json }}</pre>
-
-<button (click)="nextPage()">next</button>
-
-@if (showsPage(); as showsPage) {
-  <ul>
-    @for (showEntry of showsPage.items; track showEntry.show.id) {
-      <li>
-        <app-show-list-item [show]="showEntry.show"></app-show-list-item>
-      </li>
+  <div class="flex-1">
+    @if (showsPage(); as showsPage) {
+      <ul class="divide-y-2">
+        @for (showEntry of showsPage.items; track showEntry.show.id) {
+          <li>
+            <app-show-list-item [show]="showEntry.show"></app-show-list-item>
+          </li>
+        }
+      </ul>
     }
-  </ul>
-}
+  </div>
+
+  <app-paginator [page]="page().page" (prevPage)="prevPage()" (nextPage)="nextPage()"></app-paginator>
+</div>
