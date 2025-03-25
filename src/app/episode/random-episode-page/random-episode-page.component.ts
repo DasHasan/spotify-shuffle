@@ -10,6 +10,7 @@ import {Title} from '@angular/platform-browser';
 import {FaviconService} from '../../service/favicon.service';
 import {PageComponent} from '../../page/page.component';
 import {EpisodeDetailComponent} from '../episode-detail/episode-detail.component';
+import {Platform} from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-random-episode-page',
@@ -24,6 +25,7 @@ import {EpisodeDetailComponent} from '../episode-detail/episode-detail.component
 })
 export class RandomEpisodePageComponent {
   private readonly title = inject(Title);
+  private readonly platform = inject(Platform);
   private readonly faviconService = inject(FaviconService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly spotifyService = inject(SpotifyService);
@@ -40,6 +42,10 @@ export class RandomEpisodePageComponent {
       if (this.randomEpisode()) {
         this.faviconService.setFavicon(this.randomEpisode()?.images![0].url!)
         this.title.setTitle(this.randomEpisode()?.name!);
+
+        if (this.platform.ANDROID) {
+          window.open(this.randomEpisode()?.external_urls?.spotify, '_blank');
+        }
       }
 
       onCleanup(() => {
