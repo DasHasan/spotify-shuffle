@@ -24,4 +24,9 @@ export const routes: Routes = [
     loadComponent: () => import('./shows-page/shows-page.component').then(m => m.ShowsPageComponent),
     canActivate: [spotifyGuard]
   },
+  {
+    path: 'shows/:id',
+    loadComponent: () => import('./show-page/show-page.component').then(m => m.ShowPageComponent),
+    canActivate: [spotifyGuard]
+  },
 ];
