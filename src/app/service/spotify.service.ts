@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {catchError, map, of} from 'rxjs';
 import {SpotifyAuthService} from './spotify-auth.service';
 import {SpotifyApiService} from './spotify-api.service';
-import {HttpParams} from '@angular/common/http';
 import {Page} from '../model/page';
 import {ShowEntry} from '../model/show-entry';
 
@@ -25,12 +24,10 @@ export class SpotifyService {
   }
 
   getShows() {
-    return this.spotifyApiService.getCall<Page<ShowEntry>>('/me/shows', new HttpParams({
-        fromObject: {
-          limit: 20,
-          offset: 0
-        }
-      })
+    return this.spotifyApiService.getCall<Page<ShowEntry>>('/me/shows', {
+        limit: 20,
+        offset: 0
+      }
     );
   }
 }
