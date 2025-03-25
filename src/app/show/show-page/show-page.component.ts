@@ -10,7 +10,7 @@ import {MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from '@angul
 import {MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {PageComponent} from '../../page/page.component';
-import {JsonPipe, NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {Episode} from '../../model/episode';
 
 @Component({
@@ -26,7 +26,6 @@ import {Episode} from '../../model/episode';
     RouterLink,
     PageComponent,
     NgOptimizedImage,
-    JsonPipe,
   ],
   templateUrl: './show-page.component.html',
   styles: ``

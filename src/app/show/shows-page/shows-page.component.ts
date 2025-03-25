@@ -1,7 +1,7 @@
 import {Component, inject, signal} from '@angular/core';
 import {SpotifyService} from '../../service/spotify.service';
 import {toObservable, toSignal} from '@angular/core/rxjs-interop';
-import {finalize, switchMap, tap} from 'rxjs';
+import {switchMap, tap} from 'rxjs';
 import {Page} from '../../model/page';
 import {ShowEntry} from '../../model/show-entry';
 import {PaginatorComponent} from '../../paginator/paginator/paginator.component';
