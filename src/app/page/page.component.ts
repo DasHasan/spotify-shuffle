@@ -1,4 +1,4 @@
-import {Component, input, signal, TemplateRef} from '@angular/core';
+import {Component, input, TemplateRef} from '@angular/core';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {NavbarComponent} from '../navbar/navbar/navbar.component';
 import {NgTemplateOutlet} from '@angular/common';
