@@ -1,3 +1,5 @@
-<app-page [showBack]="true" [title]="episode()?.name">
-  <app-episode-detail [episode]="episode()!"></app-episode-detail>
+<app-page [loading]="!episode()" [showBack]="true" [title]="episode()?.name">
+  @if (episode()) {
+    <app-episode-detail [episode]="episode()!"></app-episode-detail>
+  }
 </app-page>

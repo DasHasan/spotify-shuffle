@@ -1,7 +1,7 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {toObservable, toSignal} from '@angular/core/rxjs-interop';
-import {map, switchMap, tap} from 'rxjs';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {map} from 'rxjs';
 import {SpotifyService} from '../../service/spotify.service';
 import {PaginatorComponent} from '../../paginator/paginator/paginator.component';
 import {PageInput} from '../../model/page-input';
@@ -50,17 +50,24 @@ export class ShowPageComponent {
     this.spotifyService.getShow(this.showId())
   );
 
-  episodes = toSignal<Episode[] | undefined>(
-    toObservable(this.page).pipe(
-      tap(_ => this.isLoading.set(true)),
+  episodes = signal<Episode[] | undefined>(undefined);
 
-      switchMap(page => this.spotifyService.getEpisodesPage(this.showId(), page).pipe(
+  constructor() {
+    effect((onCleanup) => {
+      this.isLoading.set(true);
+
+      const subscription = this.spotifyService.getEpisodesPage(this.showId(), this.page()).pipe(
         map(episodePage => episodePage.items?.filter(Boolean))
-      )),
+      ).subscribe(episodes => {
+        this.episodes.set(episodes);
+        this.isLoading.set(false);
+      });
 
-      tap(_ => this.isLoading.set(false)),
-    )
-  );
+      onCleanup(() => {
+        subscription.unsubscribe();
+      });
+    });
+  }
 
   loadPage({pageIndex, pageSize}: PageEvent) {
     this.page.set({

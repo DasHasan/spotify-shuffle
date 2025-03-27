@@ -1,7 +1,5 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {SpotifyService} from '../../service/spotify.service';
-import {toObservable, toSignal} from '@angular/core/rxjs-interop';
-import {switchMap, tap} from 'rxjs';
 import {Page} from '../../model/page';
 import {ShowEntry} from '../../model/show-entry';
 import {PaginatorComponent} from '../../paginator/paginator/paginator.component';
@@ -38,13 +36,22 @@ export class ShowsPageComponent {
     index: 0,
   });
 
-  showsPage = toSignal<Page<ShowEntry> | undefined>(
-    toObservable(this.page).pipe(
-      tap(_ => this.isLoading.set(true)),
-      switchMap(page => this.spotifyService.getShows(page)),
-      tap(_ => this.isLoading.set(false)),
-    )
-  );
+  showsPage = signal<Page<ShowEntry> | undefined>(undefined);
+
+  constructor() {
+    effect((onCleanup) => {
+      this.isLoading.set(true);
+
+      const subscription = this.spotifyService.getShows(this.page()).subscribe(showsPage => {
+        this.showsPage.set(showsPage);
+        this.isLoading.set(false);
+      });
+
+      onCleanup(() => {
+        subscription.unsubscribe();
+      });
+    });
+  }
 
   loadPage({pageIndex, pageSize}: PageEvent) {
     this.page.set({
