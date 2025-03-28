@@ -2,15 +2,15 @@
 
   @if (showBack()) {
     <button mat-icon-button routerLink="..">
-      <mat-icon fontIcon="arrow_back" class="text-white"></mat-icon>
+      <mat-icon fontIcon="arrow_back"></mat-icon>
     </button>
   } @else {
     <button mat-icon-button routerLink="/">
-      <mat-icon fontIcon="home" class="text-white"></mat-icon>
+      <mat-icon fontIcon="home"></mat-icon>
     </button>
   }
 
-  <span class="flex-1 block text-nowrap text-ellipsis overflow-hidden text-white">
+  <span class="flex-1 block text-nowrap text-ellipsis overflow-hidden">
     {{ title() }}
   </span>
 
@@ -19,7 +19,7 @@
   }
 
   <button mat-icon-button routerLink="/user">
-    <mat-icon class="text-white" fontIcon="person"></mat-icon>
+    <mat-icon fontIcon="person"></mat-icon>
   </button>
 
 </mat-toolbar>
