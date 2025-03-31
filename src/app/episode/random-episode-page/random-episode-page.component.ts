@@ -48,7 +48,7 @@ export class RandomEpisodePageComponent {
             }
 
             if (this.randomEpisode()) {
-                this.faviconService.setFavicon(this.randomEpisode()?.images![0].url!);
+                // this.faviconService.setFavicon(this.randomEpisode()?.images![0].url!);
 
                 if (this.platform.ANDROID) {
                     window.open(this.randomEpisode()?.uri, '_blank');

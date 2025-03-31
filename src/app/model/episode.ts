@@ -1,3 +1,5 @@
+import {Show} from './show';
+
 export interface Episode {
   audio_preview_url?: string;
   description?: string;
@@ -19,6 +21,7 @@ export interface Episode {
   type?: string;
   uri?: string;
   restrictions?: Restrictions;
+  show?: Show;
 }
 
 export interface ExternalUrls {

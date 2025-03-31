@@ -1,4 +1,4 @@
-<app-page [loading]="!episode()" [showBack]="true" [title]="episode()?.name">
+<app-page [loading]="loading()" [showBack]="true" [title]="title()">
   @if (episode()) {
     <app-episode-detail [episode]="episode()!"></app-episode-detail>
   }

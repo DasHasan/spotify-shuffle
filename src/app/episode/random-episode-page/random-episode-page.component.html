@@ -1,4 +1,4 @@
-<app-page [extra]="extra" [loading]="!randomEpisode()" [showBack]="true" [title]="randomEpisode()?.name">
+<app-page [extra]="extra" [loading]="!randomEpisode()" [showBack]="true" [title]="show()?.name">
   @if (randomEpisode()) {
     <app-episode-detail [episode]="randomEpisode()!"></app-episode-detail>
   }
