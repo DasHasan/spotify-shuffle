@@ -2,13 +2,17 @@ import {Component, inject} from '@angular/core';
 import {SpotifyService} from '../../service/spotify.service';
 import {JsonPipe} from '@angular/common';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {NavbarComponent} from '../../navbar/navbar/navbar.component';
+import {PageComponent} from '../../page/page.component';
+import {MatCard} from '@angular/material/card';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-details',
   imports: [
     JsonPipe,
-    NavbarComponent
+    PageComponent,
+    MatCard,
+    MatIcon
   ],
   templateUrl: './user-details.component.html',
   styles: ``

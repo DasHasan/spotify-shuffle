@@ -7,7 +7,7 @@ import {PaginatorComponent} from '../../paginator/paginator/paginator.component'
 import {PageInput} from '../../model/page-input';
 import {PageEvent} from '@angular/material/paginator';
 import {MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from '@angular/material/list';
-import {MatIconButton} from '@angular/material/button';
+import {MatIconAnchor} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {PageComponent} from '../../page/page.component';
 import {NgOptimizedImage} from '@angular/common';
@@ -21,11 +21,11 @@ import {Episode} from '../../model/episode';
     MatNavList,
     MatListItem,
     MatListItemIcon,
-    MatIconButton,
     MatIcon,
     RouterLink,
     PageComponent,
     NgOptimizedImage,
+    MatIconAnchor,
   ],
   templateUrl: './show-page.component.html',
   styles: ``

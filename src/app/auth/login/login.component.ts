@@ -2,14 +2,14 @@ import {Component, inject} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {SpotifyAuthService} from '../../service/spotify-auth.service';
-import {NavbarComponent} from '../../navbar/navbar/navbar.component';
 import {MatButton} from '@angular/material/button';
+import {PageComponent} from '../../page/page.component';
 
 @Component({
   selector: 'app-login',
   imports: [
-    NavbarComponent,
-    MatButton
+    MatButton,
+    PageComponent
   ],
   templateUrl: './login.component.html',
   styles: ``

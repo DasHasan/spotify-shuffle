@@ -5,7 +5,12 @@
   @if (!loading()) {
 
     <div class="flex-1 overflow-auto">
-      <ng-content></ng-content>
+      <mat-sidenav-container class="h-full">
+        <!--<mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>-->
+        <mat-sidenav-content>
+          <ng-content></ng-content>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
     </div>
 
   } @else {

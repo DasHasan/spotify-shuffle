@@ -2,19 +2,44 @@
 
 @use '@angular/material' as mat;
 
-:root {
-  @include mat.toolbar-overrides((
-    container-background-color: linear-gradient(to right, #34d399, #2dd4bf),
-  ));
-
-  @include mat.button-overrides((
-    filled-container-color: #2dd4bf,
-  ));
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  @include mat.theme((
+    color: mat.$cyan-palette
+  ));
+
+  @include mat.toolbar-overrides((
+    container-background-color: var(--mat-sys-primary),
+    container-text-color: var(--mat-sys-on-primary),
+  ));
+
+  mat-toolbar {
+    @include mat.icon-overrides((
+      color: var(--mat-sys-on-primary),
+    ));
+  }
+
+  @include mat.sidenav-overrides((
+    content-background-color: var(--mat-sys-surface-variant),
+  ));
+
+  @include mat.list-overrides((
+    list-item-label-text-color: var(--mat-sys-on-surface-variant),
+  ));
+
+  @include mat.card-overrides((
+    elevated-container-color: var(--mat-sys-surface),
+  ));
+
+  @media (prefers-color-scheme: dark) {
+    @include mat.theme((
+      color: mat.$violet-palette
+    ));
+  }
+}
 
 html, body {
   height: 100%;
@@ -24,4 +49,3 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-

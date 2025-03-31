@@ -2,13 +2,16 @@ import {Component, input, TemplateRef} from '@angular/core';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {NavbarComponent} from '../navbar/navbar/navbar.component';
 import {NgTemplateOutlet} from '@angular/common';
+import {MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-page',
   imports: [
     MatProgressSpinner,
     NavbarComponent,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    MatSidenavContainer,
+    MatSidenavContent
   ],
   templateUrl: './page.component.html',
   styles: ``
